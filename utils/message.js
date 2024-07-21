@@ -1,10 +1,10 @@
-const moment = require('moment')
+const moment = require('moment-timezone')
 
 function formatMessage(username,text,sentByme){
     return {
         username,
         text,
-        time:moment.utc().format('MMMM Do, h:mm a'),
+        time: moment().tz('Asia/Kolkata').format('MMMM Do, h:mm a'),
         sentByme:sentByme
     };
 }
