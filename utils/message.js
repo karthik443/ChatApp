@@ -4,7 +4,7 @@ function formatMessage(username,text,sentByme){
     return {
         username,
         text,
-        time:moment().format('MMMM Do, h:mm a'),
+        time:moment.utc().format('MMMM Do, h:mm a'),
         sentByme:sentByme
     };
 }
