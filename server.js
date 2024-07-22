@@ -22,7 +22,7 @@ io.on('connection', socket => {
         room:user.room,
         users:getRoomUsers(user.room)
        })
-       socket.emit('message',formatMessage(botName,'welcome to chat'),user.room);
+       socket.emit('message',formatMessage(botName,'welcome to chat',user.room));
     //    alert(user.username)
     //    console.log(user,'*******')
        socket.broadcast.to(user.room).emit('message',formatMessage(botName,`${user.username} has entered the chat`,user.room))
