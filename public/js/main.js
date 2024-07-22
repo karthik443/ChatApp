@@ -5,9 +5,24 @@ const chatMessages=   document.querySelector('.chat-messages')
 const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
 const usertitle = document.getElementById('userName');
+const container= document.querySelector('.chat-container')
 const { username, room } = Qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });
+let passCodes={
+    AiQod:"AiQod@d6",
+    Kabab:"Kabab@b6",
+    SecretChat:"Secrett10Chat@",
+    RIPCHAT:"RIPCHAT@T&",
+    GuestROOM:"GuestROOM@M9",
+    ExtraChat:"ExtraChat@t9"
+}
+const pass= prompt(`Enter passcode for ${room} Room! `)
+if(pass!==(passCodes[room])){
+    window.location = '../index.html';
+    alert('Wrong password entered! ')
+}else{
+    container.style.display='block'
 usertitle.innerText=username
 socket.emit('joinRoom',username,room)
 socket.on('connect', () => {
@@ -75,4 +90,4 @@ document.getElementById('leave-btn').addEventListener('click', () => {
     } else {
     }
   });
-  
+}
