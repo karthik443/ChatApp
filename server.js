@@ -22,10 +22,10 @@ io.on('connection', socket => {
         room:user.room,
         users:getRoomUsers(user.room)
        })
-       socket.emit('message',formatMessage(botName,'welcome to chat'));
+       socket.emit('message',formatMessage(botName,'welcome to chat'),user.room);
     //    alert(user.username)
     //    console.log(user,'*******')
-       socket.broadcast.to(user.room).emit('message',formatMessage(botName,`${user.username} has entered the chat`))
+       socket.broadcast.to(user.room).emit('message',formatMessage(botName,`${user.username} has entered the chat`,user.room))
 
     
     
@@ -35,14 +35,14 @@ io.on('connection', socket => {
     
     socket.on('chatMsg',msg=>{
         const user= getCurrentUser(socket.id)
-        socket.broadcast.to(user.room).emit('message',formatMessage(user.username,msg))
+        socket.broadcast.to(user.room).emit('message',formatMessage(user.username,msg,user.room))
         let sentByme=true;
-        socket.emit('message',formatMessage('You',msg,sentByme))
+        socket.emit('message',formatMessage('You',msg,user.room,sentByme))
     })
     socket.on('disconnect',()=>{
         const user= userLeave(socket.id)
         if(user){
-            io.to(user.room).emit('message',formatMessage(botName,`${user.username} has left the chat`))
+            io.to(user.room).emit('message',formatMessage(botName,`${user.username} has left the chat`,user.room))
             io.to(user.room).emit('roomUsers',{
                 room:user.room,
                 users:getRoomUsers(user.room)

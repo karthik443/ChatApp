@@ -164,7 +164,10 @@ a {
 	margin: 80px auto;
 	color: #fff;
 }
-
+.chatroomImg{
+	height: 35px;
+	width: 35px;
+}
 .join-header {
 	text-align: center;
 	padding: 20px;

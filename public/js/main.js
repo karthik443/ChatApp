@@ -22,6 +22,15 @@ if(pass!==(passCodes[room])){
     window.location = '../index.html';
     alert('Wrong password entered! ')
 }else{
+
+    if (!("Notification" in window)) {
+        // Check if the browser supports notifications
+        console.log("This browser does not support desktop notification");
+    }
+       else if (Notification.permission !== "denied") {
+        // We need to ask the user for permission
+        Notification.requestPermission()
+      }
     container.style.display='block'
 usertitle.innerText=username
 socket.emit('joinRoom',username,room)
@@ -36,6 +45,18 @@ socket.on('roomUsers',({room,users})=>{
 socket.on('message',msg=>{
     
     outputMessage(msg)
+    if (document.hidden && Notification.permission === "granted") {
+        const options = {
+            body: `${msg.username}: ${msg.text}`,
+            data: {
+              status: "open",
+            },
+            icon:'../assets/icons8-woozy-face-94.png'
+          };
+          console.log(msg)
+          const n = new Notification(`ChatRooms-${msg.room}`, options);
+        // new Notification('ChatRooms',options);
+      }
     chatMessages.scrollTop=chatMessages.scrollHeight
     // console.log(msg)
 })
