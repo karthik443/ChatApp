@@ -47,14 +47,14 @@ socket.on('message',msg=>{
     outputMessage(msg)
     if (document.hidden && Notification.permission === "granted") {
         const options = {
-            body: `${msg.username}: ${msg.text}`,
+            body: `${msg.text}`,
             data: {
               status: "open",
             },
             icon:'../assets/icons8-woozy-face-94.png'
           };
           console.log(msg)
-          const n = new Notification(`ChatRooms-${msg.room}`, options);
+          const n = new Notification(`${msg.username}@ ${msg.room}`, options);
         // new Notification('ChatRooms',options);
       }
     chatMessages.scrollTop=chatMessages.scrollHeight
